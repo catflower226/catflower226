@@ -1,0 +1,44 @@
+#include <PRIZM.h>
+PRIZM prizm;
+
+#define rack 1
+#define elbow 3
+#define hand 2
+
+void setup() { 
+  prizm.PrizmBegin();
+}
+
+void loop() {
+
+  if (prizm.readLineSensor(4) == true){  
+    OpHand(90); //Neutral
+    delay(200);
+    OpHand(0); //close
+    delay(200);
+    prizm.setServoPosition(elbow,90);
+} 
+
+  while (prizm.readSonicSensorCM(3) > 5 ){   // greater than 5 cm    
+    Moverack(-100);  // rack moves right  
+}                                                                          
+  Moverack(0); // stops the rack
+  OpHand(180); //open
+  prizm.setServoPosition(elbow,40);
+  
+   while (prizm.readSonicSensorCM(5) > 5 ){   // greater than 5 cm    
+    Moverack(100);  // rack moves left                       
+}
+  
+  prizm.PrizmEnd();
+ 
+}
+
+void Moverack(int deg){
+  prizm.setCRServoState(rack,deg);
+  delay(100);
+}
+
+void OpHand(int deg){
+  prizm.setServoPosition(hand, deg);
+}
