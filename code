@@ -16,7 +16,7 @@ void loop() {
     prizm.setServoPosition(elbow,100);
 
 
-  while (prizm.readSonicSensorCM(3) > 4 ){   // greater than 5 cm    
+  while (prizm.readSonicSensorCM(3) > 3 ){   // greater than 3 cm    
     Moverack(-100);  // rack moves right  
 }                                                                          
   Moverack(0); // stops the rack
@@ -26,7 +26,7 @@ void loop() {
   delay(200);
 
   
-   while (prizm.readSonicSensorCM(5) > 5 ){   // greater than 5 cm    
+   while (prizm.readSonicSensorCM(5) > 2 ){   // greater than 2 cm    
     Moverack(100);  // rack moves left                       
 }
   
